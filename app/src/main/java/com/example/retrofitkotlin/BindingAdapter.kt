@@ -7,12 +7,13 @@ import android.view.View
 import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.example.retrofitkotlin.adapert.GenericAdapter
 import com.example.retrofitkotlin.viewmodel.MarsProperty
 import com.example.retrofitkotlin.viewmodel.MarshApiStatus
 
 @BindingAdapter("listData")
 fun bindRecyclerView(rv:RecyclerView, data :List<MarsProperty>?){
-    val adapter = rv.adapter as HomeAdapter
+    val adapter = rv.adapter as GenericAdapter<MarsProperty>
     adapter.submitList(data)
 }
 

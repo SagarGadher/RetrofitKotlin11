@@ -1,5 +1,6 @@
 package com.example.retrofitkotlin.adapert
 
+import android.annotation.SuppressLint
 import android.support.v7.recyclerview.extensions.ListAdapter
 import android.support.v7.util.DiffUtil
 import android.support.v7.widget.RecyclerView
@@ -9,23 +10,13 @@ import android.view.ViewGroup
 abstract class GenericAdapter<T> : ListAdapter<T, RecyclerView.ViewHolder>(object :
     DiffUtil.ItemCallback<T>() {
     override fun areItemsTheSame(oldItem: T, newItem: T): Boolean {
-        oldItem.id == newItem.id
+        return true
     }
 
+    @SuppressLint("DiffUtilEquals")
     override fun areContentsTheSame(oldItem: T, newItem: T): Boolean =
         oldItem == newItem
 }) {
-    //RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-
-    /*companion object DiffCallback : DiffUtil.ItemCallback<T>() {
-        override fun areItemsTheSame(p0: T, p1: T): Boolean {
-            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-        }
-
-        override fun areContentsTheSame(p0: T, p1: T): Boolean {
-            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-        }
-    }*/
 
     //complete
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
