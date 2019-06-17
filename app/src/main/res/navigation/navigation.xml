@@ -9,5 +9,9 @@
         <action android:id="@+id/action_homeFragment_to_detailFragment" app:destination="@id/detailFragment"/>
     </fragment>
     <fragment android:id="@+id/detailFragment" android:name="com.example.retrofitkotlin.fragment.DetailFragment"
-              android:label="layout_fragment_detail" tools:layout="@layout/layout_fragment_detail"/>
+              android:label="layout_fragment_detail" tools:layout="@layout/layout_fragment_detail">
+        <argument
+                android:name="selectedProperty"
+                app:argType="com.example.retrofitkotlin.viewmodel.MarsProperty"/>
+    </fragment>
 </navigation>

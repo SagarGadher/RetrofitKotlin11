@@ -1,9 +1,7 @@
 package com.example.retrofitkotlin.adapert
 
-import android.databinding.DataBindingUtil
 import android.databinding.ViewDataBinding
 import android.support.v7.widget.RecyclerView
-import android.view.LayoutInflater
 import com.example.retrofitkotlin.R
 import com.example.retrofitkotlin.databinding.ListHomeItemBinding
 import com.example.retrofitkotlin.viewmodel.MarsProperty
@@ -36,7 +34,8 @@ object GenericViewHolderFactory {
     }*/
 
     // with data binding View Holder
-    class UserViewHolder(private val binding: ViewDataBinding) : RecyclerView.ViewHolder(binding.root), GenericAdapter.Binder<MarsProperty> {
+    class UserViewHolder(private val binding: ViewDataBinding) :
+        RecyclerView.ViewHolder(binding.root), GenericAdapter.Binder<MarsProperty> {
         override fun bind(data: MarsProperty) {
             binding as ListHomeItemBinding
             binding.property = data

@@ -8,6 +8,10 @@ import kotlinx.coroutines.Deferred
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Query
+
+
+enum class MyApiFilter(val value:String){SHOW_RENT("rent"),SHOW_BUY("buy"),SHOW_ALL("all")}
 
 private const val BASE_URL = "https://mars.udacity.com/"
 
@@ -23,7 +27,7 @@ private val retrofit = Retrofit.Builder()
 
 interface MarsApiService {
     @GET("realestate")
-    fun getProperties(): Deferred<List<MarsProperty>>
+    fun getProperties(@Query("filter")type:String): Deferred<List<MarsProperty>>
 }
 
 object MarsApi {

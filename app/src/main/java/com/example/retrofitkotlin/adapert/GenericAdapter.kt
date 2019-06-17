@@ -9,15 +9,11 @@ import android.view.ViewGroup
 
 abstract class GenericAdapter<T> : ListAdapter<T, RecyclerView.ViewHolder>(object :
     DiffUtil.ItemCallback<T>() {
-    override fun areItemsTheSame(oldItem: T, newItem: T): Boolean {
-        return true
-    }
+    override fun areItemsTheSame(oldItem: T, newItem: T): Boolean = true
 
     @SuppressLint("DiffUtilEquals")
-    override fun areContentsTheSame(oldItem: T, newItem: T): Boolean =
-        oldItem == newItem
+    override fun areContentsTheSame(oldItem: T, newItem: T): Boolean = oldItem == newItem
 }) {
-
     //complete
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
         getBinding(parent, viewType)
@@ -25,7 +21,7 @@ abstract class GenericAdapter<T> : ListAdapter<T, RecyclerView.ViewHolder>(objec
     //complete
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         (holder as Binder<T>).bind(getItem(position))
-        holder.itemView.setOnClickListener { onClick(position) }
+        holder.itemView.setOnClickListener { onClick(getItem(position)) }
     }
 
 
@@ -36,7 +32,7 @@ abstract class GenericAdapter<T> : ListAdapter<T, RecyclerView.ViewHolder>(objec
 
     abstract fun getBinding(view: View, viewType: Int): RecyclerView.ViewHolder
 
-    abstract fun onClick(position: Int)
+    abstract fun onClick(itemClicked: T)
 
     internal interface Binder<T> {
         fun bind(data: T)

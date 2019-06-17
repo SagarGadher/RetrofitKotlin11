@@ -3,4 +3,11 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="display_type">For %s</string>
+    <string name="type_sale">Sale</string>
+    <string name="type_rent">Rent</string>
+    <string name="format_price_sale">Price: %,.0f Rs.</string>
+    <string name="format_price_rent">Price: %,.0f Rs/Month</string>
+
 </resources>

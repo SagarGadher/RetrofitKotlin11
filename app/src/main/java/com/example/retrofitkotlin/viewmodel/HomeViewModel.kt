@@ -4,6 +4,7 @@ import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import com.example.retrofitkotlin.MarsApi
+import com.example.retrofitkotlin.MyApiFilter
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -18,7 +19,7 @@ class HomeViewModel : ViewModel() {
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
     init {
-        getAllProperties()
+        getAllProperties(MyApiFilter.SHOW_ALL)
     }
 
     private val _status = MutableLiveData<MarshApiStatus>()
@@ -31,11 +32,11 @@ class HomeViewModel : ViewModel() {
     val properties:LiveData<List<MarsProperty>>
     get() = _properties
 
-    private fun getAllProperties() {
+    private fun getAllProperties(filter:MyApiFilter) {
         coroutineScope.launch {
             try {
                 _status.value = MarshApiStatus.LOADING
-                val listResutl = MarsApi.retrofitService.getProperties().await()
+                val listResutl = MarsApi.retrofitService.getProperties(filter.value).await()
                 if (listResutl.size>0)
                 _properties.value = listResutl
                 _status.value = MarshApiStatus.DONE
@@ -45,6 +46,15 @@ class HomeViewModel : ViewModel() {
                 _properties.value = ArrayList()
             }
         }
+    }
+
+    fun updateFilter(filter:MyApiFilter){
+        getAllProperties(filter)
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        viewModelJob.cancel()
     }
 
 }
